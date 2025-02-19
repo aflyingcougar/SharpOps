@@ -44,7 +44,7 @@ main() {
     metamod_fix
 
     _log "Checking for CounterStrikeSharp files..."
-    if [ ! -f ${SERVER_DIR}/game/csgo/addons/counterstrikesharp/bin/linuxstreamrt64/counterstrikesharp.so ]; then
+    if [ ! -f ${SERVER_DIR}/game/csgo/addons/counterstrikesharp/bin/linuxsteamrt64/counterstrikesharp.so ]; then
         _log "CounterStrikeSharp files not found, checking for latest release..."
         css_url=$(  
             wget -qO- https://api.github.com/repos/roflmuffin/CounterStrikeSharp/releases/latest |
