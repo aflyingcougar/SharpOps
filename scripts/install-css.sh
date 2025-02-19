@@ -46,8 +46,8 @@ main() {
     _log "Checking for CounterStrikeSharp files..."
     if [ ! -f ${SERVER_DIR}/game/csgo/addons/counterstrikesharp/bin/linuxstreamrt64/counterstrikesharp.so ]; then
         _log "CounterStrikeSharp files not found, checking for latest release..."
-        css_url=$(
-            curl -s https://api.github.com/repos/roflmuffin/CounterStrikeSharp/releases/latest |
+        css_url=$(  
+            wget -q https://api.github.com/repos/roflmuffin/CounterStrikeSharp/releases/latest |
             jq -r '.assets[] | select(.name | test("runtime.*linux")) | .browser_download_url'
         )
 
