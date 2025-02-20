@@ -3,6 +3,7 @@
 main() {
     _log "Running original entrypoint..."
     /opt/scripts/start.sh &
+    start_pid="$!"
 
     # Wait for the 'cs2' process to start
     while ! pgrep -x "cs2" > /dev/null; do
@@ -14,6 +15,14 @@ main() {
     if [ -n "$cs2_pid" ]; then
         kill -SIGTERM "$cs2_pid"
         wait "$cs2_pid" 2>/dev/null
+    fi
+
+    _log "Waiting for the original entrypoint to exit"
+    wait $start_pid 2>/dev/null
+
+    # Only let SteamCMD validate once
+    if [ "${VALIDATE}" == "true" ]; then
+        VALIDATE="false"
     fi
 
     _log "CS2 server stopped."
