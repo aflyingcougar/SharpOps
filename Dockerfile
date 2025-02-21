@@ -7,4 +7,4 @@ RUN apt-get update && \
 COPY /scripts/ /opt/scripts/
 RUN chmod -R 770 /opt/scripts/
 
-ENTRYPOINT ["/opt/scripts/install-css.sh"]
+ENTRYPOINT ["/opt/scripts/entrypoint.sh"]
