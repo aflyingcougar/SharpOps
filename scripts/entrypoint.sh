@@ -12,7 +12,7 @@ main() {
 
     _log "Stopping the CS2 server to install/update Metamod and CounterStrikeSharp"
     cs2_pid=$(pgrep -x "cs2")
-    if [ -n "$cs2_pid" ]; then
+    if [[ -n "$cs2_pid" ]]; then
         kill -SIGTERM "$cs2_pid"
         wait "$cs2_pid" 2>/dev/null
     fi
@@ -22,7 +22,7 @@ main() {
     _log "CS2 server stopped."
 
     # Only let SteamCMD validate once
-    if [ "${VALIDATE}" == "true" ]; then
+    if [[ ${VALIDATE} == "true" ]]; then
         VALIDATE="false"
     fi
 
@@ -37,7 +37,7 @@ main() {
 
 _log() {
     local msg="${1}"
-    printf '[install-css] %s\n' "${msg}"
+    printf '[CSS-UPDATER] %s\n' "${msg}"
 }
 
 main "$@"
