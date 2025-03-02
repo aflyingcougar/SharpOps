@@ -13,7 +13,7 @@ main() {
     _log "Stopping the CS2 server to install/update Metamod and CounterStrikeSharp"
     cs2_pid=$(pgrep -x "cs2")
     if [[ -n "$cs2_pid" ]]; then
-        kill -SIGTERM "$cs2_pid"
+        kill -SIGTERM "$cs2_pid" 2>/dev/null
         wait "$cs2_pid" 2>/dev/null
     fi
 
@@ -29,6 +29,10 @@ main() {
     # Update Metamod and CounterStrikeSharp
     su ${USER} -c "/opt/scripts/update-css.sh"
     
+    # Update CounterStrikeSharp plugins (optional)
+    if [[ ${UPDATE_PLUGINS} == "true" ]]; then
+        su ${USER} -c "/opt/scripts/update-plugins.sh"    
+    fi
 
     # Finally, run original installation/setup again
     exec /opt/scripts/start.sh
