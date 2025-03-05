@@ -1,0 +1,9 @@
+# Ignore GitHub workflows
+.github/
+
+# Ignore Git repository files
+.git/
+
+# Ignore the LICENSE and README.md
+LICENSE
+README.md
