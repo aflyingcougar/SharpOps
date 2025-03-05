@@ -3,9 +3,6 @@
 API_URL="https://api.github.com/repos"  # GitHub API URL
 PLUGINS_METADATA="${SERVER_DIR}/util/plugins_metadata.json"
 
-author_regex='^[a-zA-Z0-9-]+$'
-repo_regex='^[a-zA-Z0-9._-]+$'
-
 main() {
     # Create 'plugins.txt' if it doesn't exist
     if [[ ! -f ${SERVER_DIR}/plugins.txt ]]; then
@@ -33,6 +30,8 @@ check_for_new_plugins() {
     local valid_plugins=()      # from 'plugins.txt' (format: owner/repo)
     local tracked_plugins=()    # from '${SERVER_DIR}/util/plugins_metadata.json'
     local missing_plugins=()
+    local author_regex='^[a-zA-Z0-9-]+$'
+    local repo_regex='^[a-zA-Z0-9._-]+$'
 
     # Make sure 'plugins_metadata.json' exists
     if [[ ! -f ${PLUGINS_METADATA} ]]; then
@@ -334,6 +333,10 @@ move_plugin_file() {
         */addons)
             _log "${plugin_name}: Detected archive with 'addons/' as root. Moving files to ${SERVER_DIR}/game/csgo"
             target_dir="${SERVER_DIR}/game/csgo/addons"
+            ;;
+        */cfg)
+            _log "${plugin_name}: Detected archive with 'cfg/' as root. Moving files to ${SERVER_DIR}/game/csgo"
+            target_dir="${SERVER_DIR}/game/csgo/cfg"
             ;;
         */counterstrikesharp)
             _log "${plugin_name}: Detected archive with 'counterstrikesharp/' as root. Moving files to ${SERVER_DIR}/game/csgo/addons"

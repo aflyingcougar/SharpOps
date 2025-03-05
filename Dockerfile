@@ -4,6 +4,7 @@ RUN apt-get update && \
     apt-get -y install --no-install-recommends jq rsync unzip && \
     rm -rf /var/lib/apt/lists/*
 
+ENV GAME_ID="730"
 ENV UPDATE_PLUGINS="true"
 
 COPY /scripts/ /opt/scripts/
