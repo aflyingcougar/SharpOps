@@ -1,4 +1,4 @@
-# SharpOps
+## SharpOps
 SharpOps is a Docker container built on [`ich777/steamcmd:cs2`](https://github.com/ich777/docker-steamcmd-server/tree/cs2), designed to automate the setup and management of Counter-Strike 2 dedicated servers with CounterStrikeSharp (CSS) and its dependencies. This container simplifies server administration by:
 
 - Automatically installing Metamod & CounterStrikeSharp and keeping them updated
@@ -8,7 +8,7 @@ SharpOps is a Docker container built on [`ich777/steamcmd:cs2`](https://github.c
 
 This project is ideal for server administrators looking for an easy way to deploy and maintain a fully modded CS2 experience with minimal manual intervention. 🚀
 
-# FEATURES
+## Features
  - [x] Metamod auto-install & update
  - [x] CounterStrikeSharp auto-install & update
  - [x] CounterStrikeSharp plugins auto-install & update*
@@ -16,7 +16,7 @@ This project is ideal for server administrators looking for an easy way to deplo
  - [ ] Allow users to specify the build/release version of each plugin in `plugins.txt`, rather than always downloading the latest release.
 
 
-### Environment Variables 
+## Environment Variables 
 
 | Variable Name       | Default Value | Description |
 |---------------------|--------------|-------------|
