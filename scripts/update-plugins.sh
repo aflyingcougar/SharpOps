@@ -1,5 +1,7 @@
 #!/bin/bash
 
+################################################################################
+
 API_URL="https://api.github.com/repos"  # GitHub API URL
 PLUGINS_METADATA="${SERVER_DIR}/util/plugins_metadata.json"
 
