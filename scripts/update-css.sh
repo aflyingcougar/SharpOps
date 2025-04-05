@@ -36,12 +36,13 @@ css_update() {
         jq -r '.assets[] | select(.name | test("runtime.*linux")) | .browser_download_url'
     )
     css_url_version=$(
-        echo $css_url | awk -F'build-' '{print $2}' | grep -oE '^[0-9]+'
+        echo $css_url | awk -F'/' '{print $8}'
     )
+    css_url_version=$(normalize_version "$css_url_version")
 
     # Update if newer version available, otherwise continue
     if [[ -n $css_url && -n $css_url_version ]]; then
-        if [[ $css_url_version -gt $css_version ]]; then
+        if dpkg --compare-versions "$css_url_version" gt "$css_version"; then
             _log "A newer version of CounterStrikeSharp was found: Build ${css_url_version} at ${css_url}"
             _log "Downloading CounterStrikeSharp..."
             wget -qO /tmp/counterstrikesharp.zip $css_url || { _log "Error: Failed to download CounterStrikeSharp" >&2; exit 1; }
@@ -97,6 +98,24 @@ metamod_update() {
     else
         _log "Failed to determine the latest release of Metamod from the upstream repository! Maybe the website is down?"
     fi
+}
+
+normalize_version() {
+    # $1: version string (e.g., 'v1.2.3' or 'build-1234')
+    # Returns the normalized version string by removing unnecessary prefixes and characters.
+
+    if [[ -z "$1" ]]; then
+        _log "Error: No version string provided" >&2
+        return 1
+    fi
+
+    # Normalize the version string: remove 'v' and 'build-' prefixes
+    local version="$1"
+    version=$(echo "$version" | tr '[:upper:]' '[:lower:]')
+    version="${version#v}"
+    version="${version//[^0-9.]/}"
+
+    echo "$version"
 }
 
 main "$@"
